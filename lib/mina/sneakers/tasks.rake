@@ -7,7 +7,7 @@ namespace :sneakers do
   set :sneakers_run_cmd, -> { "#{fetch(:bundle_prefix)} rake sneakers:run" }
 
   desc 'Start sneakers'
-  task start: :environment do
+  task :start do
     comment 'Sneakers starting ...'
     in_path(fetch(:current_path)) do
       command fetch(:sneakers_run_cmd)
@@ -15,7 +15,7 @@ namespace :sneakers do
   end
 
   desc 'Stop sneakers'
-  task stop: :environment do
+  task :stop do
     comment 'Sneakers stopping ...'
     command %{
       if [ -e "#{fetch(:sneakers_pid)}" ]; then
@@ -31,7 +31,7 @@ namespace :sneakers do
   end
 
   desc 'Hard stop sneakers'
-  task hard_stop: :environment do
+  task :hard_stop do
     comment 'Sneakers stopping --hard ...'
     command %{
       if [ -e "#{fetch(:sneakers_pid)}" ]; then
@@ -47,7 +47,7 @@ namespace :sneakers do
   end
 
   desc 'Get status of sneakers'
-  task status: :environment do
+  task :status do
     comment 'Sneakers status...'
     command %{
       if [ -e "#{fetch(:sneakers_pid)}" ]; then
@@ -63,14 +63,14 @@ namespace :sneakers do
   end
 
   desc 'Restart sneakers'
-  task restart: :environment do
+  task :restart do
     comment 'Restart sneakers...'
     invoke :'sneakers:stop'
     invoke :'sneakers:start'
   end
 
   desc 'Restart sneakers (phased restart). Auto Scaling support'
-  task phased_restart: :environment do
+  task :phased_restart do
     comment 'Phased restart sneakers... '
     command %{
       if [ -e "#{fetch(:sneakers_pid)}" ]; then
