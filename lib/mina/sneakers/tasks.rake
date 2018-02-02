@@ -19,8 +19,8 @@ namespace :sneakers do
     comment 'Sneakers stopping ...'
     command %{
       if [ -e "#{fetch(:sneakers_pid)}" ]; then
-        if [ -e /proc/$(cat '#{fetch(:sneakers_pid)}') ]; then
-          kill -INT `cat '#{fetch(:sneakers_pid)}'`
+        if [ -e /proc/$(cat #{fetch(:sneakers_pid)}) ]; then
+          kill -INT `cat #{fetch(:sneakers_pid)}`
         else
           echo 'Sneakers stopped!';
         fi
@@ -35,8 +35,8 @@ namespace :sneakers do
     comment 'Sneakers stopping --hard ...'
     command %{
       if [ -e "#{fetch(:sneakers_pid)}" ]; then
-        if [ -e /proc/$(cat '#{fetch(:sneakers_pid)}') ]; then
-          kill -9 `cat '#{fetch(:sneakers_pid)}'`
+        if [ -e /proc/$(cat #{fetch(:sneakers_pid)}) ]; then
+          kill -9 `cat #{fetch(:sneakers_pid)}`
         else
           echo 'Sneakers stopped!';
         fi
@@ -51,7 +51,7 @@ namespace :sneakers do
     comment 'Sneakers status...'
     command %{
       if [ -e "#{fetch(:sneakers_pid)}" ]; then
-        if [ -e /proc/$(cat '#{fetch(:sneakers_pid)}') ]; then
+        if [ -e /proc/$(cat #{fetch(:sneakers_pid)}) ]; then
           echo 'Sneakers is running'
         else
           echo 'Sneakers stopped';
@@ -74,7 +74,7 @@ namespace :sneakers do
     comment 'Phased restart sneakers... '
     command %{
       if [ -e "#{fetch(:sneakers_pid)}" ]; then
-        if [ -e /proc/$(cat '#{fetch(:sneakers_pid)}') ]; then
+        if [ -e /proc/$(cat #{fetch(:sneakers_pid)}) ]; then
           kill -SIGUSR2 `cat #{fetch(:sneakers_pid)}` && kill -SIGUSR1 `cat #{fetch(:sneakers_pid)}`
         else
           echo 'Sneakers stopped!';
